@@ -15,6 +15,7 @@
 		6BCAF861193F79F2006A4078 /* FanspageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCAF85E193F79F2006A4078 /* FanspageCell.swift */; };
 		6BCAF862193F79F2006A4078 /* WebImageOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCAF85F193F79F2006A4078 /* WebImageOperations.swift */; };
 		6BCAF864193F7A46006A4078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BCAF863193F7A46006A4078 /* Main.storyboard */; };
+		6BCAF866193F8DB5006A4078 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BCAF865193F8DB5006A4078 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		6BCAF85E193F79F2006A4078 /* FanspageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FanspageCell.swift; sourceTree = "<group>"; };
 		6BCAF85F193F79F2006A4078 /* WebImageOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebImageOperations.swift; sourceTree = "<group>"; };
 		6BCAF863193F7A46006A4078 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6BCAF865193F8DB5006A4078 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				6BCAF863193F7A46006A4078 /* Main.storyboard */,
 				6BCAF85E193F79F2006A4078 /* FanspageCell.swift */,
 				6BCAF85F193F79F2006A4078 /* WebImageOperations.swift */,
+				6BCAF865193F8DB5006A4078 /* API.swift */,
 				6BCAF85D193F79F2006A4078 /* facebook.txt */,
 				6BCAF847193F79B5006A4078 /* Images.xcassets */,
 				6BCAF83E193F79B5006A4078 /* Supporting Files */,
@@ -222,6 +225,7 @@
 				6BCAF861193F79F2006A4078 /* FanspageCell.swift in Sources */,
 				6BCAF843193F79B5006A4078 /* ViewController.swift in Sources */,
 				6BCAF841193F79B5006A4078 /* AppDelegate.swift in Sources */,
+				6BCAF866193F8DB5006A4078 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +402,7 @@
 				6BCAF859193F79B5006A4078 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6BCAF85A193F79B5006A4078 /* Build configuration list for PBXNativeTarget "SwiftFanspageTests" */ = {
 			isa = XCConfigurationList;
@@ -406,6 +411,7 @@
 				6BCAF85C193F79B5006A4078 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -34,10 +34,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var searchButton:UIButton = UIButton()
         
-        searchButton.setTitleColor(UIColor.grayColor(), forState:UIControlState.Normal)
+        searchButton.setTitleColor(UIColor.grayColor(), forState:.Normal)
         searchButton.frame = CGRectMake(240, 0, 30, 44)
-        searchButton.setTitle("Go", forState:UIControlState.Normal)
-        searchButton.addTarget(self, action: Selector("searchClick:"), forControlEvents:UIControlEvents.TouchUpInside)
+        searchButton.setTitle("Go", forState:.Normal)
+        searchButton.addTarget(self, action: Selector("searchClick:"), forControlEvents:.TouchUpInside)
         searchView.addSubview(searchButton)
         
         
@@ -60,37 +60,66 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if searchText == "" {
             searchText = "apple"
         }
+        
+
+        
         var string :NSString = "https://graph.facebook.com/search?q=\(searchText)&type=page&access_token=\(facebookToken)";
-        var encodeString :NSString = string.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        var url :NSURL = NSURL.URLWithString(encodeString)
-        var request:NSURLRequest = NSURLRequest(URL:url)
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:
-            { (response :NSURLResponse!, data :NSData!, error :NSError!) in
+        
+        var params :NSDictionary = NSDictionary()
+        API.sharedInstance.getPath(string, params: params, completion:
+            {(response :NSURLResponse!, json :AnyObject!) in
                 self.activityIndicator.stopAnimating()
-                if error {
-                    NSLog("error:%@", error.localizedDescription)
-                }
-                else {
-                    var jsonString :NSString = NSString.init(data: data, encoding: NSUTF8StringEncoding)
-                    NSLog("Response:%@", jsonString)
-                    var jsonData :NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
+                
+                var dictionary :NSDictionary = json as NSDictionary
+                if dictionary["error"] {
+                    NSLog("error:%@", (dictionary["error"] as NSDictionary)["message"] as NSString)
+                    var path :NSString = NSBundle.mainBundle().pathForResource("facebook", ofType: "txt")
+                    var content :NSString = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error:nil)
+                    NSLog("content:%@", content)
+                    var jsonData :NSData = content.dataUsingEncoding(NSUTF8StringEncoding)
                     var object : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: nil)
-                    var dictionary :NSDictionary = object as NSDictionary
-                    if dictionary["error"] {
-                        NSLog("error:%@", (dictionary["error"] as NSDictionary)["message"] as NSString)
-                        var path :NSString = NSBundle.mainBundle().pathForResource("facebook", ofType: "txt")
-                        var content :NSString = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error:nil)
-                        NSLog("content:%@", content)
-                        var jsonData :NSData = content.dataUsingEncoding(NSUTF8StringEncoding)
-                        var object : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: nil)
-                        dictionary = object as NSDictionary
-                    }
-                    
-                    self.tableArray = dictionary["data"] as NSArray
-                    self.table.reloadData()
+                    dictionary = object as NSDictionary
                 }
-            }
-        )
+                
+                self.tableArray = dictionary["data"] as NSArray
+                self.table.reloadData()
+            
+        }, failure: {(response :NSURLResponse!, error :NSError!) in
+            NSLog("error:%@", error.localizedDescription)
+        })
+    
+        
+        
+//        var encodeString :NSString = string.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+//        var url :NSURL = NSURL.URLWithString(encodeString)
+//        var request:NSURLRequest = NSURLRequest(URL:url)
+//        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:
+//            { (response :NSURLResponse!, data :NSData!, error :NSError!) in
+//                self.activityIndicator.stopAnimating()
+//                if error {
+//                    NSLog("error:%@", error.localizedDescription)
+//                }
+//                else {
+//                    var jsonString :NSString = NSString.init(data: data, encoding: NSUTF8StringEncoding)
+//                    NSLog("Response:%@", jsonString)
+//                    var jsonData :NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
+//                    var object : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: nil)
+//                    var dictionary :NSDictionary = object as NSDictionary
+//                    if dictionary["error"] {
+//                        NSLog("error:%@", (dictionary["error"] as NSDictionary)["message"] as NSString)
+//                        var path :NSString = NSBundle.mainBundle().pathForResource("facebook", ofType: "txt")
+//                        var content :NSString = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error:nil)
+//                        NSLog("content:%@", content)
+//                        var jsonData :NSData = content.dataUsingEncoding(NSUTF8StringEncoding)
+//                        var object : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: nil)
+//                        dictionary = object as NSDictionary
+//                    }
+//                    
+//                    self.tableArray = dictionary["data"] as NSArray
+//                    self.table.reloadData()
+//                }
+//            }
+//        )
     }
     
     
