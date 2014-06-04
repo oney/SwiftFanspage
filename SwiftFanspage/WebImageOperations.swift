@@ -1,9 +1,9 @@
 //
 //  WebImageOperations.swift
-//  Xcode6test
+//  SwiftFanspage
 //
-//  Created by SpoonRocket on 2014/6/4.
-//  Copyright (c) 2014年 spoonrocket. All rights reserved.
+//  Created by Oney on 2014/6/4.
+//  Copyright (c) 2014 oney. All rights reserved.
 //
 
 import UIKit
