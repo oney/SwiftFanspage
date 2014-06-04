@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var search: UITextField = UITextField()
     @IBOutlet var activityIndicator: UIActivityIndicatorView
     
-    let facebookToken = "CAAU9v7PfmyEBAMfjjR4wzzObEKZC1zmaZBn3l4fHN1BwQwEY4xIEqZCUJYKVAxWJyDPMIFfWGcXE6ZB154u2vxcdRb3C7ngXl8hZBp9AZBJSsuYmgGuwZAD1im7ZAD8hZAO80WtMYkKpGisib564xS1WYTtkc7V6eDfMgLRyNyZBDTiqa59dCeSu3KGVklLUStoHgZD"
+    let facebookToken = "CAAU9v7PfmyEBAOrTTI1zplN1LlBPPkZCVKvwqeKVLvlLOu5qG5aA5nbYZCv6z52U8Ad17NnPh8FwSAtzlwguAcsUsblToJJ1MPZB375nnGnLfy8s6jOtOTKAmhqRcxrZCqZCeSCZASQzv5qnpBIZBh6NDFBNoLJTBIi8yguiVOO58ncTN34ViCN" //Replace token if it has expired, you can get the token in https://developers.facebook.com/tools/explorer/
     
     var tableArray = []
     
