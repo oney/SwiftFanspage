@@ -23,7 +23,6 @@ class API: NSObject {
         super.init()
     }
     func getPath2(path :NSString, params :NSDictionary, completion:((NSURLResponse!, AnyObject!) -> Void)!, failure:((NSURLResponse!, NSError!) -> Void)!) -> Void {
-        
         var encodeString :NSString = path.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         var url :NSURL = NSURL.URLWithString(encodeString)
         var request:NSURLRequest = NSURLRequest(URL:url)
