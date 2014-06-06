@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var searchView :UIView = UIView()
     @IBOutlet var activityIndicator: UIActivityIndicatorView
     
-    let facebookToken = "CAAU9v7PfmyEBAOrTTI1zplN1LlBPPkZCVKvwqeKVLvlLOu5qG5aA5nbYZCv6z52U8Ad17NnPh8FwSAtzlwguAcsUsblToJJ1MPZB375nnGnLfy8s6jOtOTKAmhqRcxrZCqZCeSCZASQzv5qnpBIZBh6NDFBNoLJTBIi8yguiVOO58ncTN34ViCN" //Replace token if it has expired, you can get the token in https://developers.facebook.com/tools/explorer/
+    let facebookToken :NSString = "CAAU9v7PfmyEBAOrTTI1zplN1LlBPPkZCVKvwqeKVLvlLOu5qG5aA5nbYZCv6z52U8Ad17NnPh8FwSAtzlwguAcsUsblToJJ1MPZB375nnGnLfy8s6jOtOTKAmhqRcxrZCqZCeSCZASQzv5qnpBIZBh6NDFBNoLJTBIi8yguiVOO58ncTN34ViCN" //Replace token if it has expired, you can get the token in https://developers.facebook.com/tools/explorer/
     
     var tableArray = []
     
@@ -55,7 +55,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func searchFanspage() {
         self.activityIndicator.startAnimating()
         
-        var searchText = search.text
+        var searchText :NSString = search.text
         if searchText == "" {
             searchText = "apple"
         }
@@ -63,8 +63,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         
         var string :NSString = "https://graph.facebook.com/search?q=\(searchText)&type=page&access_token=\(facebookToken)";
+        var params :NSMutableDictionary = NSMutableDictionary()
         
-        var params :NSDictionary = NSDictionary()
         API.sharedInstance.getPath(string, params: params, completion:
             {(response :NSURLResponse!, json :AnyObject!) in
                 self.activityIndicator.stopAnimating()
@@ -91,7 +91,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func searchClick(button:UIButton) {
         searchFanspage()
-        search.resignFirstResponder()
+//        search.resignFirstResponder()
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
@@ -108,6 +108,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.name.text = "Name: \(name)"
         cell.category.text = category
         cell.photo.image = nil
+        
+/*
+        cell.photo.setImageWithURL(NSURL.URLWithString(photoUrlString))
+        var url :NSURL = NSURL.URLWithString(photoUrlString)
+        var manager :SDWebImageManager = SDWebImageManager.sharedManager()
+        manager.downloadWithURL(url, options: SDWebImageOptions.CacheMemoryOnly, progress:nil , completed: {(image :UIImage!, error :NSError!, cacheType :SDImageCacheType, finished:Bool) in
+            if image {
+                cell.photo.image = image
+            }
+            
+            
+            }
+        )
+*/
+        
         WebImageOperations.processImageDataWithURLString(photoUrlString,
             { (data :NSData!) in
                 var image :UIImage = UIImage(data: data)

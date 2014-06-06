@@ -22,9 +22,8 @@ class API: NSObject {
     init() {
         super.init()
     }
-    func getPath(path :NSString, params :NSDictionary, completion:((NSURLResponse!, AnyObject!) -> Void)!, failure:((NSURLResponse!, NSError!) -> Void)!) -> Void {
+    func getPath2(path :NSString, params :NSDictionary, completion:((NSURLResponse!, AnyObject!) -> Void)!, failure:((NSURLResponse!, NSError!) -> Void)!) -> Void {
         
-
         var encodeString :NSString = path.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         var url :NSURL = NSURL.URLWithString(encodeString)
         var request:NSURLRequest = NSURLRequest(URL:url)
@@ -48,5 +47,36 @@ class API: NSObject {
                 }
             }
         )
+    }
+    func getPath(path :NSString, params :NSDictionary, completion:((NSURLResponse!, AnyObject!) -> Void)!, failure:((NSURLResponse!, NSError!) -> Void)!) -> Void {
+        var encodeString :NSString = path.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        
+        let manager = AFHTTPRequestOperationManager()
+        manager.GET(
+            encodeString,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                completion(operation.response, responseObject)
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                completion(operation.response, error)
+            })
+    }
+    func postPath(path :NSString, params :NSDictionary, completion:((NSURLResponse!, AnyObject!) -> Void)!, failure:((NSURLResponse!, NSError!) -> Void)!) -> Void {
+        
+        let manager = AFHTTPRequestOperationManager()
+        manager.POST(
+            path,
+            parameters: params,
+            success: { (operation: AFHTTPRequestOperation!,
+                responseObject: AnyObject!) in
+                completion(operation.response, responseObject)
+            },
+            failure: { (operation: AFHTTPRequestOperation!,
+                error: NSError!) in
+                completion(operation.response, error)
+            })
     }
 }
