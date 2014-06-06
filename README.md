@@ -15,3 +15,5 @@ How to use
 
 - Just run it
 - You need to modify facebookToken in ViewController.swift if token has expired
+
+Using AFNetworking and SDWebImage with CocoaPod
