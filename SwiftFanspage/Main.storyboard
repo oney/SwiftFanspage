@@ -82,16 +82,17 @@
                     <connections>
                         <outlet property="activityIndicator" destination="HMU-fC-LtN" id="r8P-ua-sPt"/>
                         <outlet property="table" destination="2xi-qs-dtR" id="QZd-zv-yf5"/>
+                        <segue destination="ZEp-Kz-ICw" kind="show" identifier="fanspageDetail" id="Iy2-OE-zh1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="60" y="124"/>
         </scene>
-        <!--View Controller-->
+        <!--Fanspage Detail View Controller-->
         <scene sceneID="17t-C4-bah">
             <objects>
-                <viewController id="ZEp-Kz-ICw" sceneMemberID="viewController">
+                <viewController id="ZEp-Kz-ICw" customClass="FanspageDetailViewController" customModule="SwiftFanspage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SzE-wE-vmq"/>
                         <viewControllerLayoutGuide type="bottom" id="RYA-0a-BOP"/>
@@ -99,9 +100,19 @@
                     <view key="view" contentMode="scaleToFill" id="Q17-Wn-xV6">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwz-Ng-03g">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" id="nbW-Iu-SAu"/>
+                    <connections>
+                        <outlet property="webView" destination="lwz-Ng-03g" id="OLW-ZI-LnJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tid-a5-lEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

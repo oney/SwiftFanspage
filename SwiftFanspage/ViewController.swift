@@ -13,6 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var table: UITableView
     var search: UITextField = UITextField()
+    var searchView :UIView = UIView()
     @IBOutlet var activityIndicator: UIActivityIndicatorView
     
     let facebookToken = "CAAU9v7PfmyEBAOrTTI1zplN1LlBPPkZCVKvwqeKVLvlLOu5qG5aA5nbYZCv6z52U8Ad17NnPh8FwSAtzlwguAcsUsblToJJ1MPZB375nnGnLfy8s6jOtOTKAmhqRcxrZCqZCeSCZASQzv5qnpBIZBh6NDFBNoLJTBIi8yguiVOO58ncTN34ViCN" //Replace token if it has expired, you can get the token in https://developers.facebook.com/tools/explorer/
@@ -22,7 +23,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var searchView :UIView = UIView()
         searchView.frame = CGRectMake(0, 0, 270, 44)
         
         search.frame = CGRectMake(50, 7, 180, 30)
@@ -39,7 +39,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchButton.setTitle("Go", forState:.Normal)
         searchButton.addTarget(self, action: Selector("searchClick:"), forControlEvents:.TouchUpInside)
         searchView.addSubview(searchButton)
-        
         
         self.navigationController.navigationBar.addSubview(searchView)
         
@@ -87,49 +86,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }, failure: {(response :NSURLResponse!, error :NSError!) in
             NSLog("error:%@", error.localizedDescription)
         })
-    
-        
-        
-//        var encodeString :NSString = string.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-//        var url :NSURL = NSURL.URLWithString(encodeString)
-//        var request:NSURLRequest = NSURLRequest(URL:url)
-//        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler:
-//            { (response :NSURLResponse!, data :NSData!, error :NSError!) in
-//                self.activityIndicator.stopAnimating()
-//                if error {
-//                    NSLog("error:%@", error.localizedDescription)
-//                }
-//                else {
-//                    var jsonString :NSString = NSString.init(data: data, encoding: NSUTF8StringEncoding)
-//                    NSLog("Response:%@", jsonString)
-//                    var jsonData :NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding)
-//                    var object : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: nil)
-//                    var dictionary :NSDictionary = object as NSDictionary
-//                    if dictionary["error"] {
-//                        NSLog("error:%@", (dictionary["error"] as NSDictionary)["message"] as NSString)
-//                        var path :NSString = NSBundle.mainBundle().pathForResource("facebook", ofType: "txt")
-//                        var content :NSString = NSString.stringWithContentsOfFile(path, encoding:NSUTF8StringEncoding, error:nil)
-//                        NSLog("content:%@", content)
-//                        var jsonData :NSData = content.dataUsingEncoding(NSUTF8StringEncoding)
-//                        var object : AnyObject! = NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers, error: nil)
-//                        dictionary = object as NSDictionary
-//                    }
-//                    
-//                    self.tableArray = dictionary["data"] as NSArray
-//                    self.table.reloadData()
-//                }
-//            }
-//        )
     }
     
     
     func searchClick(button:UIButton) {
         searchFanspage()
         search.resignFirstResponder()
-    }
-    
-    @IBAction func go(button:UIButton){
-        NSLog("hiii")
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
@@ -159,6 +121,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         searchFanspage()
         textField.resignFirstResponder()
         return true
+    }
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+    {
+        searchView.hidden = true
+        var dic :NSDictionary = self.tableArray[indexPath.row] as NSDictionary
+        self.performSegueWithIdentifier("fanspageDetail", sender: dic)
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue?, sender: AnyObject?) {
+        
+        if segue?.identifier == "fanspageDetail" {
+            var dest :FanspageDetailViewController = segue?.destinationViewController as FanspageDetailViewController
+            var dic :NSDictionary = sender as NSDictionary
+            dest.segueParam = dic
+        }
+        
+        
     }
     
 }

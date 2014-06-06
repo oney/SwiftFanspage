@@ -2,14 +2,14 @@
 //  API.swift
 //  SwiftFanspage
 //
-//  Created by SpoonRocket on 2014/6/5.
-//  Copyright (c) 2014年 oney. All rights reserved.
+//  Created by Oney on 2014/6/5.
+//  Copyright (c) 2014 oney. All rights reserved.
 //
 
 import UIKit
 
 class API: NSObject {
-    class var sharedInstance:API {
+    class var sharedInstance :API {
         get {
             struct Static {
                 static var instance : API? = nil
